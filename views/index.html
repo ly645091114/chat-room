@@ -1,0 +1,18 @@
+{{ extend './layout/index.html' }}
+{{ block 'head' }}
+{{ /block }}
+{{ block 'content' }}
+  <div class="content">
+    {{ if !isFirst }}
+      <p>哟！客官</p>
+      <p>看您有些面生</p>
+      <p>是第一次上这来吧？</p>
+    {{ else }}
+      <p>哟！客官</p>
+      <p>咦，看您有点眼熟</p>
+      <p>是来过这吧？</p>
+    {{ /if }}
+  </div>
+{{ /block }}
+{{ block 'script' }}
+{{ /block }}
