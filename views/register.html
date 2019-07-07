@@ -1,0 +1,35 @@
+{{ extend './layout/index.html' }}
+{{ block 'head' }}
+{{ /block }}
+{{ block 'content' }}
+  <div class="content container">
+    <p>那您可就来对地儿啦~</p>
+    <p>在这可以畅所欲言</p>
+    <p>只需在这登记下您的信息</p>
+    <form class="page-form" id="register-form">
+      <p class="input-item">
+        身份: <input type="text" id="username" name="username" autocomplete="off" autofocus>
+        <!-- <span>行走江湖若无口令，岂不被小人冒名顶替，毁您声誉</span> -->
+      </p>
+      <div></div>
+      <p class="input-item">称呼: <input type="text" id="name" name="name" autocomplete="off"></p>
+      <p class="input-item">
+        口令: <input type="password" id="password" name="password">
+        <!-- <span>行走江湖若无口令，岂不被小人冒名顶替，毁您声誉</span> -->
+      </p>
+    </form>
+    <p>当然您也可以四处逛逛</p>
+    <p>听听家国大事或者江湖传闻</p>
+    <p>等您感兴趣了</p>
+    <p>再回来登记也可以</p>
+    <p class="user-button">
+      <a id="register-submit" href="javascript:void(0)">记住了么</a>
+    </p>
+    <p class="user-button">
+      <a href="/login">我就随处逛逛</a>
+    </p>
+  </div>
+{{ /block }}
+{{ block 'script' }}
+  <script src="/js/login.js"></script>
+{{ /block }}

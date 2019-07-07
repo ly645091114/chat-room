@@ -4,15 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/index.css">
     <title>{{ title || '聊吧' }}</title>
     {{ block 'head' }}
     {{ /block }}
   </head>
   <body>
+    {{ include './header.html' }}
     {{ block 'content' }}
     {{ /block }}
-    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/node_modules/blueimp-md5//js/md5.min.js"></script>
+    <script src="/js/utils.js"></script>
     {{ block 'script' }}
     {{ /block }}
   </body>

@@ -1,0 +1,15 @@
+.user-button {
+  margin: 10px 0;
+  text-align: right;
+}
+.user-button a {
+  border: 4px solid transparent;
+  border-radius: 6px;
+  padding: 10px;
+  transition: border-color .3s;
+}
+.user-button a:hover,
+.user-button a:focus,
+.user-button a:visited {
+  border-color: #333;
+}
