@@ -1,9 +1,11 @@
+import { get, post } from './utils'
+
 $('#register-submit').on('click', function (e) {
   e.preventDefault()
   let formData = $('#register-form').serializeArray()
   let query = {}
-  for (let i = 0; i < formData.length; i++) {
-    query[formData[i].name] = formData[i].value
+  for (let item of formData) {
+    query[item.name] = item.value
   }
   console.log(query)
 })

@@ -14,5 +14,7 @@ const reqFuction = function (type) {
   }
 }
 
-const get = reqFuction('get')
-const post = reqFuction('post')
+export default {
+  get: reqFuction('get'),
+  post:  reqFuction('post')
+}

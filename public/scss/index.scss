@@ -1,6 +1,7 @@
-@import url('./layout.css');
-@import url('./button.css');
-@import url('./form.css');
+@import './common/var';
+@import './layout';
+@import './button';
+@import './form';
 
 body {
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'PingFang SC', 'Microsoft YaHei';
@@ -10,7 +11,7 @@ body {
 }
 
 p {
-  color: #333;
+  color: $color-primary;
   font-size: 48px;
   font-weight: bold;
   line-height: 1;
@@ -22,7 +23,7 @@ a,
 a:hover,
 a:focus,
 a:visited {
-  color: #333;
+  color: $color-primary;
   display: inline-block;
   text-decoration: none;
 }

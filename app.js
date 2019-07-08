@@ -1,11 +1,11 @@
 const express = require('express')
-let path = require('path')
-let bodyParser = require('body-parser')
-let session = require('express-session')
-let mongoose = require('mongoose')
+const path = require('path')
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
-let MongoStore = require('connect-mongo')(session)
+const MongoStore = require('connect-mongo')(session)
 
 const app = express()
 
@@ -39,7 +39,8 @@ app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'dist')))
+
 app.use('/node_modules/', express.static(path.join(__dirname, 'node_modules')))
 
 app.engine('html', require('express-art-template'))
