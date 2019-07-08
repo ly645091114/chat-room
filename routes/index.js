@@ -14,4 +14,9 @@ router.get('/register', (req, res, next) => {
   res.render('register.html')
 })
 
+router.post('/register.do', (req, res, next) => {
+  console.log(req.body)
+  res.status(200).send('你好')
+})
+
 module.exports = router
