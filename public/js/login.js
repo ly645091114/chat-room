@@ -1,5 +1,8 @@
 import { get, post } from './utils'
 
+/**
+ * 注册用户功能
+ */
 $('#register-submit').on('click', function (e) {
   e.preventDefault()
   let formData = $('#register-form').serializeArray()
@@ -9,6 +12,4 @@ $('#register-submit').on('click', function (e) {
   }
   console.log(query)
 })
-// get('/register', {}, function (error, data) {
-//   console.log(data)
-// })
+

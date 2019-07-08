@@ -12,18 +12,20 @@ body {
 
 p {
   color: $color-primary;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: bold;
   line-height: 1;
   margin: 20px 0;
   position: relative;
 }
 
-a,
-a:hover,
-a:focus,
-a:visited {
-  color: $color-primary;
-  display: inline-block;
-  text-decoration: none;
+a {
+  &,
+  &:hover,
+  &:focus,
+  &:visited {
+    color: $color-primary;
+    display: inline-block;
+    text-decoration: none;
+  }
 }

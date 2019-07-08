@@ -2,15 +2,22 @@
   margin: 0 auto;
   margin-top: 80px;
 }
-.page-form input,
-.page-form input:hover,
-.page-form input:focus {
-  border: 4px solid transparent;
-  color: #FFB7C0;
-  font-weight: bold;
-  max-width: 500px;
-  outline: none;
-  transition: border .3s;
+.page-form {
+  input {
+    &,
+    &:hover,
+    &:focus {
+      border: 4px solid transparent;
+      color: $color-primary;
+      font-weight: bold;
+      max-width: 500px;
+      outline: none;
+      transition: border .3s;
+    }
+    &:focus {
+      border-bottom: 4px solid $color-primary;
+    }
+  }
 }
 
 header {
@@ -27,8 +34,4 @@ header {
 .header-logo {
   font-size: 32px;
   font-weight: bold;
-}
-
-.page-form input:focus {
-  border-bottom: 4px solid $color-primary;
 }
