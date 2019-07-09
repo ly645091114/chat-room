@@ -25,13 +25,30 @@ header {
   box-shadow: 0 0 4px 0 #ccc;
   height: 60px;
   line-height: 60px;
+  overflow: hidden;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 100;
+  .header {
+    height: 100%;
+    &-info {
+      display: block;
+      float: right;
+      font-size: 20px;
+      font-weight: bold;
+      height: 60px;
+      line-height: 60px;
+      a {
+        font-size: 24px;
+        margin-left: 16px;
+      }
+    }
+  }
 }
 
 .header-logo {
+  display: inline-block;
   font-size: 32px;
   font-weight: bold;
 }

@@ -1,0 +1,24 @@
+{{ extend './layout/index.html' }}
+{{ block 'head' }}
+  <style>
+    .test {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  </style>
+{{ /block }}
+{{ block 'content' }}
+  <div
+    id="show-message"
+    style="margin-top: 80px">
+  </div>
+  <div class="test">
+    <textarea id="message-input" rows="3"></textarea>
+    <span id="send-message">发送</span>
+  </div>
+{{ /block }}
+{{ block 'script' }}
+<script src="/socket.io/socket.io.js"></script>
+<script src="/socket.js"></script>
+{{ /block }}

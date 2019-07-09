@@ -6,7 +6,12 @@
     font-size: 16px;
     margin-top: 8px;
   }
-  .check-show {
-    display: block;
-  }
+}
+
+.check-default {
+  display: none;
+}
+
+.check-show {
+  display: block;
 }

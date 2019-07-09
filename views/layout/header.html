@@ -1,5 +1,11 @@
 <header>
-  <div class="container">
+  <div class="container header">
     <span class="header-logo">聊吧</span>
+    {{ if user }}
+    <div class="header-info">
+      {{ user.name }}
+      <a class="fa fa-sign-out" id="logout" href="javascript:void(0)"></a>
+    </div>
+    {{ /if }}
   </div>
 </header>

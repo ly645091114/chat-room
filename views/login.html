@@ -1,0 +1,38 @@
+{{ extend './layout/index.html' }}
+{{ block 'head' }}
+{{ /block }}
+{{ block 'content' }}
+  <div class="content container">
+    {{ if visited }}
+    <p>哟！客官</p>
+    <p>看您有些面熟啊</p>
+    <p>应该是来过这的吧</p>
+    <p>哎哟，小的最近记性不好</p>
+    <p>没能认出您来</p>
+    {{ else }}
+    <p>实在抱歉</p>
+    <p>可能您太久没来了</p>
+    <p>小的没能认出来</p>
+    {{ /if }}
+    <p>麻烦您提供一下身份信息</p>
+    <form class="page-form" id="login-form">
+      <p class="input-item">
+        身份: <input type="text" id="login-username" name="username" autocomplete="off" autofocus>
+      </p>
+      <div></div>
+      <p class="input-item">
+        口令: <input type="password" id="login-password" name="password">
+      </p>
+    </form>
+    <p class="user-button">
+      <a id="login-submit" href="javascript:void(0)">知道了么</a>
+    </p>
+    <p class="user-button">
+      <a href="/register">换个身份</a>
+    </p>
+    <p class="user-button">
+        <a href="/hall">四处逛逛</a>
+      </p>
+    <p id="login-check" class="check-default"></p>
+  </div>
+{{ /block }}

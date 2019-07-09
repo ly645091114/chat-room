@@ -3,21 +3,15 @@
 {{ /block }}
 {{ block 'content' }}
   <div class="content container">
-    {{ if !isFirst }}
-      <p>哟！客官</p>
-      <p>看您有些面生</p>
-      <p>是第一次上这儿来吧</p>
-      <p class="user-button">
-        <a href="/register">嗯，是的</a>
-      </p>
-      <p class="user-button">
-        <a href="/login">咋的不认识我了</a>
-      </p>
-    {{ else }}
-      <p>哟！客官</p>
-      <p>咦，看您有点眼熟</p>
-      <p>是来过这吧</p>
-    {{ /if }}
+    <p>哟！客官</p>
+    <p>看您有些面生</p>
+    <p>是第一次上这儿来吧</p>
+    <p class="user-button">
+      <a href="/register">嗯，是的</a>
+    </p>
+    <p class="user-button">
+      <a href="/login">咋的不认识我了</a>
+    </p>
   </div>
 {{ /block }}
 {{ block 'script' }}

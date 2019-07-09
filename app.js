@@ -20,7 +20,7 @@ try {
 
 app.use(cookieParser())
 
-app.use(session({
+const sessionMiddleware = session({
   secret: 'liaobar', // 匹配加密字符串，在原有加密的基础上拼接加密，目的是为了增加安全性，防止客户端恶意伪造
   name: 'liaobar',
   resave: false,
@@ -32,7 +32,9 @@ app.use(session({
   store: new MongoStore({
     url: 'mongodb://localhost/liaobar'
   })
-}))
+})
+
+app.use(sessionMiddleware)
 
 app.use(logger('dev'))
 
@@ -46,6 +48,10 @@ app.use('/node_modules/', express.static(path.join(__dirname, 'node_modules')))
 app.engine('html', require('express-art-template'))
 app.set('views', path.join(__dirname, 'views'))
 
-app.use('/', require(path.join(__dirname, './routes/index.js')))
+app.use('/hall', require(path.join(__dirname, './routes/hall.js'))) // 大厅页面
+app.use('/', require(path.join(__dirname, './routes/index.js'))) // 用户操作逻辑挂载在最后
 
-module.exports = app
+module.exports = {
+  app,
+  sessionMiddleware
+}

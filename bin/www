@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-const app = require('../app')
+const appModel = require('../app')
 const debug = require('debug')('chat-room:server')
 const http = require('http')
+const app = appModel.app
+const sessionMiddleware = appModel.sessionMiddleware
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +22,21 @@ app.set('port', port)
  */
 
 const server = http.createServer(app)
+const socketio = require('socket.io')(server)
+
+socketio.use((socket, next) => {
+  sessionMiddleware(socket.request, socket.request.res, next)
+})
+
+socketio.on('connection', function (socket) {
+  let user = socket.request.session.user || {}
+  console.log('a user connected')
+  socket.on('chat message', function (msg) {
+    console.log(msg)
+    user.message = msg.message
+    socketio.emit('chat message', user)
+  })
+})
 
 /**
  * Listen on provided port, on all network interfaces.
