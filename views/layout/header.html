@@ -1,10 +1,14 @@
 <header>
   <div class="container header">
-    <span class="header-logo">聊吧</span>
+    <span class="header-logo">吃瓜茶楼</span>
     {{ if user }}
     <div class="header-info">
       {{ user.name }}
       <a class="fa fa-sign-out" id="logout" href="javascript:void(0)"></a>
+    </div>
+    {{ else }}
+    <div class="header-info">
+      <a href="/">登记</a>
     </div>
     {{ /if }}
   </div>

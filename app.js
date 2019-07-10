@@ -48,6 +48,15 @@ app.use('/node_modules/', express.static(path.join(__dirname, 'node_modules')))
 app.engine('html', require('express-art-template'))
 app.set('views', path.join(__dirname, 'views'))
 
+
+app.use((req, res, next) => { // 访问时从 cookie 中获取缓存信息
+  let user = req.session.user || req.cookies.user
+  req.session.user = user
+  let visited = req.session.visited || req.cookies.visited
+  req.session.visited = visited
+  next()
+})
+
 app.use('/hall', require(path.join(__dirname, './routes/hall.js'))) // 大厅页面
 app.use('/', require(path.join(__dirname, './routes/index.js'))) // 用户操作逻辑挂载在最后
 

@@ -1,0 +1,24 @@
+{{ extend './layout/index.html' }}
+{{ block 'head' }}
+{{ /block }}
+{{ block 'content' }}
+  <div class="content container">
+    <p>那么客官</p>
+    <p>想在这张桌子聊些什么呢</p>
+    <form class="page-form" id="hallroom-form">
+      <p class="input-item">
+        话题: <input type="text" id="hallroom-username" name="name" autocomplete="off" autofocus>
+        <span id="check-name"></span>
+      </p>
+    </form>
+    <p class="user-button">
+      <a id="hallroom-submit" href="javascript:void(0)">好了</a>
+    </p>
+    <p class="user-button">
+      <a href="/hall">四处逛逛</a>
+    </p>
+  </div>
+{{ /block }}
+{{ block 'script' }}
+<script src="/socket.io/socket.io.js"></script>
+{{ /block }}

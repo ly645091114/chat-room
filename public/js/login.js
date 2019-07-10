@@ -1,4 +1,5 @@
 import md5 from 'blueimp-md5'
+import { getFormObj } from './utils'
 
 /**
  * @description 输入框失焦触发事件
@@ -6,10 +7,9 @@ import md5 from 'blueimp-md5'
  * @param { Boolean } check 是否校验
  */
 const blurInput = function (name, check) {
-  check = check || true
   $(`#register-${name}`).blur(function () {
     let self = this
-    if (check && !self.value) {
+    if (!check && !self.value) {
       $(`#check-${name}`).addClass('check-show')
       $(`#check-${name}`).html(name === 'username' ?
         '客官烦请留下身份，好让小的记住您' :
@@ -21,7 +21,7 @@ const blurInput = function (name, check) {
 }
 
 blurInput('username')
-blurInput('name', false)
+blurInput('name', true)
 blurInput('password')
 
 /**
@@ -29,11 +29,7 @@ blurInput('password')
  */
 $('#register-submit').on('click', function (e) {
   e.preventDefault()
-  let formData = $('#register-form').serializeArray()
-  let query = {}
-  for (let item of formData) {
-    query[item.name] = item.value
-  }
+  let query = getFormObj('#register-form')
   if (!query.username) {
     $('#check-username').addClass('check-show')
     $('#check-username').html('客官烦请留下身份，好让小的记住您')
@@ -72,11 +68,9 @@ $('#login-password').focus(() => {
 $('#login-submit').on('click', function (e) {
   e.preventDefault()
   let el = $('#login-check')
-  let formData = $('#login-form').serializeArray()
-  let query = {}
-  for (let item of formData) {
-    query[item.name] = item.value
-    if (!item.value) {
+  let query = getFormObj('#login-form')
+  for (let prop in query) {
+    if (!query[prop]) {
       el.addClass('check-show')
       el.html('客官您这样会让小的很为难')
       return false

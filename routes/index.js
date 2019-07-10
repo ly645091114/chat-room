@@ -66,46 +66,39 @@ router.get('/logout.do', (req, res, next) => { // 退出登录逻辑
 })
 
 router.get('/success', (req, res, next) => {
-  let user = req.session.user || req.cookies.user
-  req.session.user = user
-  if (user) {
+  if (req.session.user) {
     return res.render('success.html', {
-      user
+      user: req.session.user
     })
   }
   res.redirect('/')
 })
 
 router.use((req, res, next) => { // 已经登陆过的用户不访问下面的页面
-  let user = req.session.user || req.cookies.user
-  req.session.user = user
-  if (user) {
+  if (req.session.user) {
     return res.redirect('/hall')
   }
   next()
 })
 
 router.get('/', (req, res, next) => { // 首页访问
-  let user = req.session.user || req.cookies.user
-  req.session.user = user
-  let visited = req.session.visited || req.cookies.visited
-  if (visited) {
+  if (req.session.visited) {
     return res.redirect('/login')
   }
   res.render('index.html', {
-    user
+    user: req.session.user
   })
 })
 
 router.get('/login', (req, res, next) => { // 登录访问
   res.render('login.html', {
-    visited: req.session.visited || req.cookies.visited
+    visited: req.session.visited
   })
 })
 
 router.get('/register', (req, res, next) => { // 注册访问
   res.render('register.html', {
-    visited: req.session.visited || req.cookies.visited
+    visited: req.session.visited
   })
 })
 
