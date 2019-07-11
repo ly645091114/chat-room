@@ -3,6 +3,52 @@ const router = express.Router()
 const md5 = require('blueimp-md5')
 const User = require('../models/user')
 
+router.get('/roomerror', (req, res, next) => { // 聊天室不存在
+  res.render('room-error.html', {
+    user: req.session.user
+  })
+})
+
+router.get('/logout.do', (req, res, next) => { // 退出登录逻辑
+  req.session.user = req.cookies.user = null
+  res.status(200).json({
+    code: 200,
+    data: true
+  })
+})
+
+router.get('/userInfo.do', (req, res, next) => { // 获取用户信息
+  let user = req.session.user
+  let resUser = {}
+  if (user) {
+    resUser = {
+      userId: user._id,
+      name: user.name,
+      username: user.username
+    }
+  }
+  res.status(200).json({
+    code: 200,
+    data: resUser
+  })
+})
+
+router.get('/success', (req, res, next) => {
+  if (req.session.user) {
+    return res.render('success.html', {
+      user: req.session.user
+    })
+  }
+  res.redirect('/')
+})
+
+router.use((req, res, next) => { // 已经登陆过的用户不访问下面请求
+  if (req.session.user) {
+    return res.redirect('/hall')
+  }
+  next()
+})
+
 router.post('/login.do', async (req, res, next) => { // 用户登录逻辑
   let query = req.body
   query.password = md5(query.password)
@@ -55,30 +101,6 @@ router.post('/register.do', async (req, res, next) => { // 用户注册逻辑
     code: 200,
     data: true
   })
-})
-
-router.get('/logout.do', (req, res, next) => { // 退出登录逻辑
-  req.session.user = req.cookies.user = null
-  res.status(200).json({
-    code: 200,
-    data: true
-  })
-})
-
-router.get('/success', (req, res, next) => {
-  if (req.session.user) {
-    return res.render('success.html', {
-      user: req.session.user
-    })
-  }
-  res.redirect('/')
-})
-
-router.use((req, res, next) => { // 已经登陆过的用户不访问下面的页面
-  if (req.session.user) {
-    return res.redirect('/hall')
-  }
-  next()
 })
 
 router.get('/', (req, res, next) => { // 首页访问

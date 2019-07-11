@@ -23,11 +23,9 @@ $('#hallroom-submit').on('click', (e) => {
     let roomId = data.data
     if (roomId) {
       const socket = io() // 连接 socket
-      socket.emit('hallList', 'createroom') // 连接成功后告诉 socket 创建了一个房间
-      socket.on('hallList', function (res) { // 如果 socket 返回ok跳转聊天房间
-        if (res === 'ok') {
-          location.href = `/hall/room/${roomId}`
-        }
+      socket.emit('hallList', 'getList') // 连接成功后告诉 socket 创建了一个房间
+      socket.on('hallList', function (res) { // 如果 socket 返回跳转聊天房间
+        location.href = `/hall/room/${roomId}`
       })
     } else if (data.code === 400) {
       $('#check-name').addClass('check-show')

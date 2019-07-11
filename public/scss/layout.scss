@@ -2,6 +2,9 @@
   margin: 0 auto;
   margin-top: 80px;
 }
+.container {
+  position: relative;
+}
 .page-form {
   input {
     &,
@@ -51,4 +54,34 @@ header {
   display: inline-block;
   font-size: 32px;
   font-weight: bold;
+}
+
+.room-title {
+  color: $color-primary;
+  font-size: 32px;
+  font-weight: bold;
+  position: relative;
+  a {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.send-btn {
+  border: 2px solid transparent;
+  border-radius: 6px;
+  color: #333;
+  cursor: pointer;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 0 8px;
+  position: absolute;
+  right: 0;
+  transition: all .3s;
+  top: 0;
+  &:hover {
+    border: 2px solid $color-primary;
+  }
 }

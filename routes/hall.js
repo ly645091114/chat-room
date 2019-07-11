@@ -8,9 +8,21 @@ router.get('/', (req, res, next) => { // 大厅
   })
 })
 
-router.use('/room/', (req, res, next) => { // 聊天室
-  res.render('room.html', {
-    user: req.session.user
+router.use('/room/', async (req, res, next) => { // 聊天室
+  const roomId = req.url.slice(1)
+  Room.findOne({
+    _id: roomId,
+    status: 1
+  }, (error, data) => {
+    if (data) { // 查看当前有没有该房间
+      return res.render('room.html', {
+        user: req.session.user,
+        type: 'hall',
+        title: `${data.name} - 吃瓜茶楼`,
+        roomName: data.name
+      })
+    }
+    res.redirect('/roomerror') // 没有该房间跳转提示页
   })
 })
 

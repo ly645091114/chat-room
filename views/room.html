@@ -1,23 +1,108 @@
 {{ extend './layout/index.html' }}
 {{ block 'head' }}
   <style>
-    .test {
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .message-body {
+      height: calc(100% - 128px - 127px);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    footer {
       position: fixed;
       bottom: 0;
-      left: 0;
+      width: 100%;
+    }
+    textarea {
+      border: 2px solid #333;
+      border-radius: 6px;
+      color: #333;
+      font-size: 28px;
+      font-weight: bold;
+      outline: none;
+      padding: 10px;
+      resize: none;
+      width: calc(100% - 76px);
+    }
+    .sys-message {
+      margin: 10px 0;
+      text-align: center;
+    }
+    .sys-message span {
+      display: inline-block;
+      font-size: 14px;
+      color: #eee;
+      padding: 6px 24px;
+      background: #ccc;
+      border-radius: 18px;
+    }
+    .other-user {
+      text-align: left;
+    }
+    .other-user .user-message {
+      padding-right: 32px;
+    }
+    .other-user div {
+      padding-left: 8px;
+    }
+    .self-user {
+      text-align: right;
+    }
+    .self-user .user-message {
+      padding-left: 32px;
+    }
+    .self-user div {
+      padding-right: 16px;
+    }
+    .user-message {
+      display: inline-block;
+      border: 3px solid #666;
+      border-radius: 16px;
+      margin: 16px 0;
+      padding: 4px;
+    }
+    .user-message span {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .user-message span+span {
+      padding-left: 8px;
+    }
+    .user-message div {
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 4px;
     }
   </style>
 {{ /block }}
 {{ block 'content' }}
-  <div
-    id="show-message"
-    style="margin-top: 80px">
+  <div class="content container">
+    <div class="room-title">
+      <span>
+        {{ roomName }} <span id="room-online"></span>
+      </span>
+      <a class="fa fa-share-square-o" href="/{{ type }}"></a>
+    </div>
   </div>
-  <div class="test">
-    <textarea id="message-input" rows="3"></textarea>
-    <span id="send-message">发送</span>
-  </div>
+  <div class="container message-body" id="message-body"></div>
+  {{ if user }}
+  <footer>
+    <div class="container">
+      <textarea id="message-input" rows="2"></textarea>
+      <a href="javascript:void(0)"><span class="send-btn" id="send-message">发送</span></a>
+    </div>
+  </footer>
+  {{ /if }}
 {{ /block }}
 {{ block 'script' }}
 <script src="/socket.io/socket.io.js"></script>
+{{ if type === 'hall' }}
+<script src="/hallroom.js"></script>
+{{ /if }}
 {{ /block }}

@@ -25,7 +25,8 @@ const itemListFormat = (obj) => {
 
 socket.emit('hallList', 'getList') // 建立连接后发送获取列表请求
 socket.on('hallList', (data) => { // 监听服务端返回的数据列表
-  if (data === 'ok') return false
+  if (data === 'getList') return false // 如果传递的信息为获取列表则不做渲染
+  if (data === 'updateList') return socket.emit('hallList', 'getList') // 如果收到的信息是更新列表则再次请求获取新的列表
   let fragment = document.createDocumentFragment() // 创建临时代码片，避免频繁操作 dom
   if (data.length > 0) {
     for (let item of data) {
