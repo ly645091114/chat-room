@@ -42,6 +42,17 @@ const renderMessage = (data, user) => {
   }
 }
 
+/**
+ * @description 消息发送逻辑
+ */
+const sendMessage = () => {
+  let val = $('#message-input').val().trim()
+  if (val) {
+    socket.emit('chat message', val)
+  }
+  $('#message-input').val('') // 无论发没发成功都要清空输入框
+}
+
 $.get('/userInfo.do', {}, (data) => { // 先获取用户信息
   let user = data.data
   let url = location.pathname
@@ -51,25 +62,20 @@ $.get('/userInfo.do', {}, (data) => { // 先获取用户信息
   socket.on('chat message', (msg) => {
     $('#room-online').html(`(${msg.onLineNum}人)`)
     renderMessage(msg, user)
-    $('#message-body').scrollTop(1000000000000000)
+    let scrollHeight = $('#message-body')[0].scrollHeight
+    let scrollTop = $('#message-body')[0].scrollTop
+    let bodyHeight = $('#message-body').height()
+    $('#message-body').scrollTop(scrollHeight) // 新消息滚动时滚动至最大滚动高度
   })
 
   $("#message-input").keyup((e) => {
     if (e.which === 13) {
-      let val = $('#message-input').val()
-      if (val) {
-        socket.emit('chat message', val)
-        $('#message-input').val('')
-      }
+      sendMessage()
     }
   })
 
   $('#send-message').on('click', (e) => {
     e.preventDefault()
-    let val = $('#message-input').val()
-    if (val) {
-      socket.emit('chat message', val)
-      $('#message-input').val('')
-    }
+    sendMessage()
   })
 })

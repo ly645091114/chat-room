@@ -9,10 +9,13 @@ const Room = require('../../models/room')
  * @param { Number } type 信息类型
  * @param { Object } user 用户信息
  * @param { String } msg 发送信息
- * @param { Object } roomInfo 房间信息
+ * @param { Object } roomId 房间Id
  * @returns { Object } 对象信息
  */
-const chatObj = (type, user, msg, roomInfo) => {
+const chatObj = async (type, user, msg, roomId) => {
+  let roomInfo = await Room.findOne({ // 获取聊天室的相关信息
+    _id: roomId
+  })
   let onLineNum = roomInfo.user_list.filter(item => item.status === 1).length
   let obj = {
     type: type,
@@ -73,8 +76,8 @@ const roomEvent = async (io, req, socket, msg) => { // 监听到获取列表信�
   let roomInfo = await Room.findOne({ // 获取聊天室的相关信息
     _id: msg
   })
-  socket.on('chat message', (usermsg) => { // 用户发送消息逻辑
-    let resObj = chatObj(2, user, usermsg, roomInfo) // 向聊天室发送用户进入消息
+  socket.on('chat message', async (usermsg) => { // 用户发送消息逻辑
+    let resObj = await chatObj(2, user, usermsg, msg) // 向聊天室发送用户进入消息
     sendMessage(io, resObj, msg)
   })
   const user = req.session.user // 获取用户信息
@@ -108,7 +111,7 @@ const roomEvent = async (io, req, socket, msg) => { // 监听到获取列表信�
       })
     })
   sendUpdate(io, roomInfo)
-  let resObj = chatObj(1, user, `${ user.name } 加入聊天室`, roomInfo) // 向聊天室发送用户进入消息
+  let resObj = await chatObj(1, user, `${ user.name } 加入聊天室`, msg) // 向聊天室发送用户进入消息
   io.sockets.in(msg).emit('chat message', resObj)
   socket.on('disconnect', () => { // 离开聊天室逻辑
     userLeave(io, req, socket, msg)
@@ -145,7 +148,7 @@ const userLeave = async (io, req, socket, msg) => {
         _id: msg
       })
     })
-  let resObj = chatObj(1, user, `${ user.name } 离开聊天室`, roomInfo) // 向聊天室发送用户进入消息
+  let resObj = await chatObj(1, user, `${ user.name } 离开聊天室`, msg) // 向聊天室发送用户进入消息
   io.sockets.in(msg).emit('chat message', resObj)
   userList = lodash.cloneDeep(roomInfo.user_list)  // 获取聊天室的用户列表
   if (userList.filter(item => item.status === 1).length === 0) { // 如果聊天室没有在线客户，则关闭聊天室
