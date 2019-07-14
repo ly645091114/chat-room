@@ -10,14 +10,6 @@ const http = require('http')
 const path = require('path')
 const app = appModel.app
 
-const env = process.env.NODE_ENV || 'development'
-
-let hostUrl
-if ('production' === env) {
-  process.env.PORT = '8080'
-  hostUrl = 'www.chiguachalou.cn'
-}
-
 /**
  * Get port from environment and store in Express.
  */
@@ -36,7 +28,7 @@ require(path.resolve(__dirname, '../routes/socketio/index')).getSocketio(server)
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, hostUrl)
+server.listen(port)
 server.on('error', onError)
 server.on('listening', onListening)
 
