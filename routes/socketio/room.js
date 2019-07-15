@@ -158,6 +158,7 @@ const userLeave = async (io, req, socket, msg) => {
     }, {
       status: 2
     })
+    io.sockets.in(msg).emit('closeroom', true)
   }
   sendUpdate(io, roomInfo)
 }

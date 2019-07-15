@@ -1,6 +1,11 @@
 import md5 from 'blueimp-md5'
 import { getFormObj } from './utils'
 
+const checkText = {
+  username: '客官烦请留下身份，好让小的记住您',
+  password: '行走江湖若无口令证明，岂不被小人冒名顶替，毁您声誉'
+}
+
 /**
  * @description 输入框失焦触发事件
  * @param { String } name 模块名称 
@@ -9,13 +14,21 @@ import { getFormObj } from './utils'
 const blurInput = function (name, check) {
   $(`#register-${name}`).blur(function () {
     let self = this
-    if (!check && !self.value) {
+    if (!check &&
+        ((name === 'username' &&
+        !self.value.trim()) ||
+        (name === 'password' &&
+        !self.value))) {
       $(`#check-${name}`).addClass('check-show')
-      $(`#check-${name}`).html(name === 'username' ?
-        '客官烦请留下身份，好让小的记住您' :
-        '行走江湖若无口令证明，岂不被小人冒名顶替，毁您声誉')
+      $(`#check-${name}`).html(checkText[name])
+      if (name === 'username') {
+        self.value = ''
+      }
     } else {
       $(`#check-${name}`).removeClass('check-show')
+    }
+    if (name === 'name' && !self.value.trim()) {
+      self.value = ''
     }
   })
 }
@@ -27,9 +40,14 @@ blurInput('password')
 /**
  * 注册用户功能
  */
-$('#register-submit').on('click', function (e) {
+$('#register-submit').on('click', (e) => {
   e.preventDefault()
   let query = getFormObj('#register-form')
+  for (let prop in query) {
+    if (prop !== 'password') {
+      query[prop] = query[prop].trim()
+    }
+  }
   if (!query.username) {
     $('#check-username').addClass('check-show')
     $('#check-username').html('客官烦请留下身份，好让小的记住您')

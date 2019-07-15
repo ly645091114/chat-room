@@ -9,9 +9,11 @@ import { getFormObj } from './utils'
 $('#hallroom-submit').on('click', (e) => {
   e.preventDefault()
   let query = getFormObj('#hallroom-form')
-  if (!query.name) {
+  query.name = query.name.trim()
+  if (!query.name.trim()) {
     $('#check-name').addClass('check-show')
     $('#check-name').html('话题可以让他人知道这里正在聊些什么')
+    $('#hallroom-username').val('')
     return false
   } else if (query.name.length > 20) {
     $('#check-name').addClass('check-show')

@@ -59,6 +59,11 @@ $.get('/userInfo.do', {}, (data) => { // 先获取用户信息
   let roomId = url.split('/').pop()
 
   socket.emit('join', roomId)
+  socket.on('closeroom', (msg) => {
+    if (msg) {
+      location.href = '/roomclose'
+    }
+  })
   socket.on('chat message', (msg) => {
     $('#room-online').html(`(${msg.onLineNum}人)`)
     renderMessage(msg, user)
