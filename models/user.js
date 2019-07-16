@@ -26,6 +26,11 @@ let userSchema = new Schema({
     type: Number,
     enum: [1, 2],
     default: 1
+  },
+  role: { // 用户角色 1.管理员; 2.普通用户
+    type: Number,
+    enum: [1, 2],
+    default: 2
   }
 })
 

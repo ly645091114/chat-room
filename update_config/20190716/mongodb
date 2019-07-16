@@ -1,0 +1,1 @@
+db.users.update({}, {$set: {role: 2}}, {multi: true}) # 新增用户类型执行语句

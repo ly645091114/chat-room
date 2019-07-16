@@ -59,7 +59,14 @@ router.post('/login.do', (req, res, next) => { // 用户登录逻辑
   let query = req.body
   query.password = md5(query.password)
   query.status = 1
-  User.findOne(query)
+  let nameData = {
+    name: query.username,
+    password: query.password,
+    status: query.status
+  }
+  User.findOne({
+      $or: [query, nameData]
+    })
     .then((user) => {
       if (user) {
         req.session.visited = req.cookies.visited = true

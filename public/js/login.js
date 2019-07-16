@@ -3,6 +3,7 @@ import { getFormObj } from './utils'
 
 const checkText = {
   username: '客官烦请留下身份，好让小的记住您',
+  name: '客官您的称呼太长啦！',
   password: '行走江湖若无口令证明，岂不被小人冒名顶替，毁您声誉'
 }
 
@@ -18,23 +19,23 @@ const blurInput = function (name, check) {
         ((name === 'username' &&
         !self.value.trim()) ||
         (name === 'password' &&
-        !self.value))) {
+        !self.value) ||
+        (name === 'name') &&
+        self.value.trim().length > 10)) {
       $(`#check-${name}`).addClass('check-show')
       $(`#check-${name}`).html(checkText[name])
-      if (name === 'username') {
-        self.value = ''
-      }
     } else {
       $(`#check-${name}`).removeClass('check-show')
     }
-    if (name === 'name' && !self.value.trim()) {
+    if (['username', 'name'].indexOf(name) > -1 &&
+      !self.value.trim()) {
       self.value = ''
     }
   })
 }
 
 blurInput('username')
-blurInput('name', true)
+blurInput('name')
 blurInput('password')
 
 /**
@@ -50,14 +51,21 @@ $('#register-submit').on('click', (e) => {
   }
   if (!query.username) {
     $('#check-username').addClass('check-show')
-    $('#check-username').html('客官烦请留下身份，好让小的记住您')
+    $('#check-username').html(checkText[username])
+    return false
+  } else if (query.name.length > 10) {
+    $('#check-username').removeClass('check-show')
+    $('#check-name').addClass('check-show')
+    $('#check-name').html(checkText[name])
     return false
   } else if (!query.password) {
+    $('#check-name').removeClass('check-show')
     $('#check-username').removeClass('check-show')
     $('#check-password').addClass('check-show')
-    $('#check-password').html('行走江湖若无口令证明，岂不被小人冒名顶替，毁您声誉')
+    $('#check-password').html(checkText[password])
     return false
   }
+  $('#check-name').removeClass('check-show')
   $('#check-username').removeClass('check-show')
   $('#check-password').removeClass('check-show')
   query.password = md5(query.password) // 密码传参加密

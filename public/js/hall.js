@@ -41,7 +41,7 @@ socket.on('hallList', (data) => { // 监听服务端返回的数据列表
   } else {
     let li = document.createElement('li')
     li.className = 'room-list__empty'
-    li.innerHTML = `大厅上好像没有人 ...`
+    li.innerHTML = `<p>大厅上好像没有人 ...</p>`
     fragment.appendChild(li)
   }
   $('#room-list').html(fragment)
