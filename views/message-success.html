@@ -1,0 +1,17 @@
+{{ extend './layout/index.html' }}
+{{ block 'head' }}
+{{ /block }}
+{{ block 'content' }}
+  <div class="content container">
+    <p class="user-button">
+      <a href="/hall">四处逛逛</a>
+    </p>
+  </div>
+  <div class="container">
+    <ul id="room-list">
+      <li class="room-list__empty">
+        <p>您的留言已收到，谢谢您的支持~</p>
+      </li>
+    </ul>
+  </div>
+{{ /block }}

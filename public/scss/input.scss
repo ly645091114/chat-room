@@ -1,0 +1,15 @@
+textarea {
+  border: 2px solid $color-primary;
+  border-radius: 6px;
+  color: $color-primary;
+  font-size: 28px;
+  font-weight: bold;
+  outline: none;
+  padding: 10px;
+  resize: none;
+  width: calc(100% - 76px);
+}
+
+.message-box {
+  width: 100%;
+}

@@ -85,3 +85,25 @@ header {
     border: 2px solid $color-primary;
   }
 }
+
+.message-btn {
+  border: 2px solid transparent;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  cursor: pointer;
+  color: $color-primary;
+  font-size: 16px;
+  padding: 6px 4px;
+  position: absolute;
+  top: 50%;
+  right: -2px;
+  transform: translateY(-50%);
+  writing-mode: vertical-lr;
+  transition: all .3s;
+  letter-spacing: 2px;
+  font-size: 24px;
+  font-weight: bold;
+  &:hover {
+    border: 2px solid $color-primary;
+  }
+}

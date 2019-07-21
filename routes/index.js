@@ -2,6 +2,41 @@ const express = require('express')
 const router = express.Router()
 const md5 = require('blueimp-md5')
 const User = require('../models/user')
+const Message = require('../models/message')
+
+router.get('/message', (req, res, next) => { // 留言板
+  res.render('message.html', {
+    user: req.session.user,
+    hiddenMsg: true
+  })
+})
+
+router.get('/message-success', (req, res, next) => { // 留言成功
+  res.render('message-success.html', {
+    user: req.session.user,
+    hiddenMsg: true
+  })
+})
+
+router.post('/submitMessage.do', async (req, res, next) => { // 留言板提交
+  let user = req.session.user
+  let query = req.body
+  let data = {
+    message: query.msg,
+    user_id: '0',
+    name: '游客'
+  }
+  if (user) {
+    data.user_id = user._id
+    data.name = user.name
+  }
+  await new Message(data) // 保存留言实例
+    .save()
+  res.status(200).json({
+    code: 200,
+    data: true
+  })
+})
 
 router.get('/roomerror', (req, res, next) => { // 聊天室不存在
   res.render('room-error.html', {

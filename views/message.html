@@ -1,0 +1,19 @@
+{{ extend './layout/index.html' }}
+{{ block 'head' }}
+{{ /block }}
+{{ block 'content' }}
+  <div class="content container">
+    <p>客官您好，打扰一下</p>
+    <p>小店刚开始营业</p>
+    <p>经验微薄，招待不周</p>
+    <p>希望您能留下宝贵的建议</p>
+    <p>帮助小店改善经营</p>
+    <p>您的支持是我们最大的动力</p>
+    <p>
+      <textarea class="message-box" id="message-input" rows="6"></textarea>
+    </p>
+    <p class="user-button">
+      <a id="submit-message" href="javascript:void(0)">提交</a>
+    </p>
+  </div>
+{{ /block }}
