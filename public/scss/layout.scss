@@ -94,7 +94,7 @@ header {
   color: $color-primary;
   font-size: 16px;
   padding: 6px 4px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   right: -2px;
   transform: translateY(-50%);
@@ -103,6 +103,7 @@ header {
   letter-spacing: 2px;
   font-size: 24px;
   font-weight: bold;
+  z-index: 200;
   &:hover {
     border: 2px solid $color-primary;
   }
