@@ -22,7 +22,7 @@
     "jquery": "^3.4.0",
     "lodash": "^4.17.13",
     "moment": "^2.24.0",
-    "mongoose": "^5.6.3",
+    "mongoose": "^5.7.5",
     "morgan": "~1.9.1",
     "socket.io": "^2.2.0"
   },
