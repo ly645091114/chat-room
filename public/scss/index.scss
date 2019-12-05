@@ -36,4 +36,16 @@ a {
 ul,
 li {
   list-style: none;
+  padding: 0;
+}
+
+.beian {
+  position: fixed;
+  font-size: 18px;
+  font-weight: bold;
+  height: 100px;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  width: 100%;
 }
